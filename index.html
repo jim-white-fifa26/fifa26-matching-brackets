@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Matching Brackets: FIFA 26 World Cup</title>
+    <title>Matching Brackets: FIFA26 Expert System Cup</title>
 
-    <meta property="og:title" content="Matching Brackets: FIFA 26 Predictor">
+    <meta property="og:title" content="Matching Brackets: FIFA26 Predictor">
     <meta property="og:description" content="Match the Expert's 'Path to Glory' in this quick-fire World Cup bracket game!">
     <meta property="og:type" content="website">
     <meta property="og:image" content="social-preview.png">
@@ -98,7 +98,7 @@
 
     <div class="controls">
         <div id="status">Build your path to glory!</div>
-        <button class="btn-verify" onclick="verifyPath()">Verify My Path to Glory</button>
+        <button class="btn-verify" onclick="verifyPath()">Check My Brackets</button>
         <button id="btnShare" class="btn-share" onclick="shareResults()">Share My Prediction</button>
     </div>
 
@@ -150,7 +150,7 @@
         function verifyPath() {
             const status = document.getElementById('status');
             if (!currentChampion) {
-                status.innerText = "Please complete the bracket to the Final!";
+                status.innerText = "Please complete the path to the Final!";
                 status.style.color = "red";
                 return;
             }
