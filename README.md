@@ -3,7 +3,7 @@
 An interactive, high-energy bracket predictor game built for the **FIFA 2026 World Cup**. This web-based demo allows users to quickly predict the tournament outcome from the Round of 16 through to the Final and compare their picks with "The Expert."
 
 ## 🚀 Live Demo
-**[Insert your Vercel/Netlify URL here]**
+**[Match the Brackets!](https://fifa26-brackets.vercel.app/)**
 
 ---
 
