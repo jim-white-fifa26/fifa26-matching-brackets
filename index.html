@@ -186,7 +186,7 @@
             score = Math.floor(score);
 
             status.innerHTML = `Path to Glory Match Score: ${score}%<br>` + 
-                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your matching skills!");
+                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your bracket matching!");
             status.style.color = score >= 50 ? "green" : "orange";
         }
 
@@ -195,7 +195,7 @@
             const score = scoreMatch ? scoreMatch[1] : "0";
             const url = window.location.href;
             
-            const text = `⚽ Matching Brackets: FIFA 26 🏆\n\nI just crowned ${currentChampion} as FIFA26 Champions!\nPath Match Score: ${score}%\n\nCan you match the expert? Play here: ${url}`;
+            const text = `⚽ Matching Brackets: FIFA26 🏆\n\nI just crowned ${currentChampion} as FIFA26 Champions!\nPath Match Score: ${score}%\n\nCan you match the expert? Play here: ${url}`;
             
             navigator.clipboard.writeText(text).then(() => {
                 const btn = document.getElementById('btnShare');
