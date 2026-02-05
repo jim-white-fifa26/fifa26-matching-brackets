@@ -97,7 +97,7 @@
     </div>
 
     <div class="controls">
-        <div id="status">Build your path to glory!</div>
+        <div id="status">Build the path to glory!</div>
         <button class="btn-verify" onclick="verifyPath()">Check My Brackets</button>
         <button id="btnShare" class="btn-share" onclick="shareResults()">Share My Prediction</button>
     </div>
@@ -165,7 +165,7 @@
             if (expertPath.finalists.includes(finalR)) score += 25;
 
             status.innerHTML = `Path to Glory Match Score: ${score}%<br>` + 
-                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your prediction logic!");
+                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your matching {}!");
             status.style.color = score >= 50 ? "green" : "orange";
         }
 
