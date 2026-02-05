@@ -1,0 +1,81 @@
+<script>
+    // THE EXPERT'S KEY: Their chosen winner and their path
+    // Expert path: Scotland wins Match 1 -> QF1 -> SF1 -> Final
+    const expertPath = {
+        winner: "Scotland",
+        semis: ["Scotland", "Argentina"],
+        quarters: ["Scotland", "France", "Spain", "Argentina"]
+    };
+
+    let userChoices = {
+        winner: "",
+        semis: [],
+        quarters: []
+    };
+
+    function pick(el, targetId) {
+        if (el.classList.contains('empty') && !el.innerHTML) return;
+
+        // Visual Dimming logic
+        const group = el.parentElement;
+        group.querySelectorAll('.slot').forEach(s => { 
+            s.classList.add('lost'); 
+            s.classList.remove('winner'); 
+        });
+        el.classList.remove('lost');
+        el.classList.add('winner');
+
+        const teamName = el.dataset.name;
+
+        // Populate Target and update our userChoices object
+        if (targetId === 'CHAMPION') {
+            userChoices.winner = teamName;
+            document.getElementById('champion-flag').innerHTML = el.innerHTML;
+            document.getElementById('champion-flag').style.display = 'block';
+            document.getElementById('winner-banner').style.display = 'block';
+            document.getElementById('btnShare').style.display = 'block';
+        } else {
+            const nextSlot = document.getElementById(targetId);
+            if (nextSlot) {
+                nextSlot.innerHTML = el.innerHTML;
+                nextSlot.dataset.name = teamName;
+                nextSlot.classList.remove('empty');
+                
+                // Track Path (Internal Logic)
+                if (targetId.startsWith('SF')) userChoices.semis.push(teamName);
+                if (targetId.startsWith('QF')) userChoices.quarters.push(teamName);
+            }
+        }
+    }
+
+    function verifyPath() {
+        const status = document.getElementById('status');
+        if (!userChoices.winner) {
+            status.innerHTML = "Finish your bracket to see your Match Score!";
+            return;
+        }
+
+        let score = 0;
+        let feedback = "";
+
+        // 1. Check Winner
+        if (userChoices.winner === expertPath.winner) {
+            score += 50;
+            feedback = "🏆 Champion Matches! ";
+        } else {
+            feedback = "❌ Different Champion. ";
+        }
+
+        // 2. Check Path (Semis/Quarters)
+        const finalSlots = [
+            document.getElementById('FINAL_L').dataset.name,
+            document.getElementById('FINAL_R').dataset.name
+        ];
+        
+        const pathMatch = finalSlots.filter(team => expertPath.semis.includes(team)).length;
+        score += (pathMatch * 25); // 25 points for each correct finalist
+
+        status.innerHTML = `${feedback}<br>Your Path Match Score: ${score}%`;
+        status.style.color = score > 50 ? "green" : "orange";
+    }
+</script>
