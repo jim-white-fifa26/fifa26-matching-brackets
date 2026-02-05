@@ -105,9 +105,9 @@
     <script>
         // EXPERT KEY
         const expertPath = {
-            winner: "Argentina",
-            finalists: ["Argentina", "England"],
-            quarters: ["France", "England", "Spain", "Argentina"]
+            winner: "France",
+            finalists: ["France", "Argentina"],
+            semis: ["France", "Brazil", "Spain", "Argentina"]
         };
 
         let currentChampion = "";
@@ -156,16 +156,37 @@
             }
 
             let score = 0;
+            
+            // Get user selections
             const finalL = document.getElementById('FINAL_L').dataset.name;
             const finalR = document.getElementById('FINAL_R').dataset.name;
             
+            const sf1 = document.getElementById('SF_L_T').dataset.name;
+            const sf2 = document.getElementById('SF_L_B').dataset.name;
+            const sf3 = document.getElementById('SF_R_T').dataset.name;
+            const sf4 = document.getElementById('SF_R_B').dataset.name;
+
             // Score Calculation
-            if (currentChampion === expertPath.winner) score += 50;
-            if (expertPath.finalists.includes(finalL)) score += 25;
-            if (expertPath.finalists.includes(finalR)) score += 25;
+            
+            // 1. Winner (40%)
+            if (currentChampion === expertPath.winner) score += 40;
+
+            // 2. Finalists (30% - 15% each)
+            if (expertPath.finalists.includes(finalL)) score += 15;
+            if (expertPath.finalists.includes(finalR)) score += 15;
+
+            // 3. Semi-Finalists (30% - 7.5% each)
+            // We check if the user's semi-finalists are in the expert set
+            if (expertPath.semis.includes(sf1)) score += 7.5;
+            if (expertPath.semis.includes(sf2)) score += 7.5;
+            if (expertPath.semis.includes(sf3)) score += 7.5;
+            if (expertPath.semis.includes(sf4)) score += 7.5;
+
+            // Round score to avoid decimals (though 7.5 * 4 = 30 is clean)
+            score = Math.floor(score);
 
             status.innerHTML = `Path to Glory Match Score: ${score}%<br>` + 
-                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your matching {}!");
+                (score === 100 ? "🌟 Perfect Expert Match!" : "Keep practicing your matching skills!");
             status.style.color = score >= 50 ? "green" : "orange";
         }
 
