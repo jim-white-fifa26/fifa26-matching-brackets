@@ -682,7 +682,8 @@
         const expertPath = {
             winner: "France",
             finalists: ["France", "Argentina"],
-            semis: ["France", "Brazil", "Spain", "Argentina"]
+            semis: ["France", "Brazil", "Spain", "Argentina"],
+            quarters: ["France", "Netherlands", "Brazil", "Mexico", "Spain", "USA", "Argentina", "Portugal"]
         };
 
         // ===== STATE =====
@@ -939,16 +940,21 @@
 
             let score = 0;
 
-            // Winner (40%)
-            if (champion === expertPath.winner) score += 40;
+            // Winner (30%)
+            if (champion === expertPath.winner) score += 30;
 
-            // Finalists (30%)
-            if (expertPath.finalists.includes(state.sf[0])) score += 15;
-            if (expertPath.finalists.includes(state.sf[1])) score += 15;
+            // Finalists (25%)
+            if (expertPath.finalists.includes(state.sf[0])) score += 12.5;
+            if (expertPath.finalists.includes(state.sf[1])) score += 12.5;
 
-            // Semi-finalists (30%)
+            // Semi-finalists (25%)
             state.qf.forEach(team => {
-                if (expertPath.semis.includes(team)) score += 7.5;
+                if (expertPath.semis.includes(team)) score += 6.25;
+            });
+
+            // Quarter-finalists (20%)
+            state.r16.forEach(team => {
+                if (expertPath.quarters.includes(team)) score += 2.5;
             });
 
             score = Math.floor(score);
